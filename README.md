@@ -47,23 +47,23 @@ php artisan vendor:publish --provider="Gabeta\CustomSmsChannels\CustomSmsChannel
 Now you can use the channel in your `via()` method inside the notification:
 
 ``` php
-    use NotificationChannels\OneSignal\OneSignalChannel;
-    use NotificationChannels\OneSignal\OneSignalMessage;
-    use NotificationChannels\OneSignal\OneSignalWebButton;
-    use Illuminate\Notifications\Notification;
-    
-    class WelcomeNotification extends Notification
+use NotificationChannels\OneSignal\OneSignalChannel;
+use NotificationChannels\OneSignal\OneSignalMessage;
+use NotificationChannels\OneSignal\OneSignalWebButton;
+use Illuminate\Notifications\Notification;
+
+class WelcomeNotification extends Notification
+{
+    public function via($notifiable)
     {
-        public function via($notifiable)
-        {
-            return ['customsms'];
-        }
-        
-        public function toCustomSms($notifiable)
-        {
-            return "Hello Laravel Commuty from Ivory Coast (Côte D'ivoire)";
-        }
+        return ['customsms'];
     }
+    
+    public function toCustomSms($notifiable)
+    {
+        return "Hello Laravel Commuty from Ivory Coast (Côte D'ivoire)";
+    }
+}
 ```
 
 The `customsms` channel will automatically use the provider you have defined
@@ -77,30 +77,30 @@ The `routeNotificationForCustomSms` method must return an instance of
 `Gabeta\CustomSmsChannels\PhoneNumber`.
 
 ``` php
-    use Gabeta\CustomSmsChannels\Facades\PhoneNumber;
+use Gabeta\CustomSmsChannels\Facades\PhoneNumber;
 
-    public function routeNotificationForCustomSms()
-    {
-        return PhoneNumber::setDialCode($this->dial_code)
-                    ->setPhone($this->phone);
-    }
+public function routeNotificationForCustomSms()
+{
+    return PhoneNumber::setDialCode($this->dial_code)
+                ->setPhone($this->phone);
+}
 ```
 
 In the example above (the dial code and number are stored in separate fields)
 we return an instance of `Gabeta\CustomSmsChannels\PhoneNumber` while setting
 the `dial_code` without any prefix (`+` or `00`) and the phone number.
-There are providers that use the dial and number without a prefix to send SMS
+There are providers that use the dial code and number without a prefix to send SMS
 others use the `+` or `00` prefix. The system will take care of the formatting according to
 of each provider. If the number and dial code are stored in the same field you can
 set with method.
 
 ``` php
-    use Gabeta\CustomSmsChannels\Facades\PhoneNumber;
+use Gabeta\CustomSmsChannels\Facades\PhoneNumber;
 
-    public function routeNotificationForCustomSms()
-    {
-        return PhoneNumber::setRouteNotification($this->full_phone_number);
-    }
+public function routeNotificationForCustomSms()
+{
+    return PhoneNumber::setRouteNotification($this->full_phone_number);
+}
 ```
 
 We advise you to provide the telephone number without the prefix. As mentioned above
