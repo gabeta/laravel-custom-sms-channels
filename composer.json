@@ -2,8 +2,10 @@
     "name": "gabeta/laravel-custom-sms-channels",
     "description": "Channels SMS notification for providers not supported by laravel by default.",
     "keywords": [
-        "gabeta",
         "laravel",
+        "notification",
+        "sms",
+        "infobip",
         "laravel-custom-sms-channels"
     ],
     "homepage": "https://github.com/gabeta/laravel-custom-sms-channels",
