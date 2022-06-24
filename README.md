@@ -106,15 +106,24 @@ public function routeNotificationForCustomSms()
 We advise you to provide the telephone number without the prefix. As mentioned above
 top the system will take care of the prefixing according to the provider.
 
+### Provider supporter and those we intend to implement
+
+| Providers      | channel       | via method     | route notification method          |
+| -----------    | -----------   | --------       | --------                           |
+| infobip ✅      | infobip       | toInfobip      | routeNotificationForInfobip        | 
+| log ❌          | log           | toSmsLog       | routeNotificationForSmsLog         |
+| orange ❌       | orange        | toOrange       | routeNotificationForOrange         |
+
+You could use via or route notification method if you want behavior
+channel-specific. The package tries to find the via method and the route notification method
+specific to its provider if it does not find it it will call the `routeNotificationForCustomSms` functions
+and `toCustomSms`.
+
 ## Testing
 
 ```bash
 composer test
 ```
-
-## Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
 ## Credits
 
