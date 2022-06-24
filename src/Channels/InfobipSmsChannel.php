@@ -63,10 +63,7 @@ class InfobipSmsChannel
 
         try {
             $this->client->sendSmsMessage($request);
-
-            dd($phoneNumber->getRouteNotification());
         } catch (Throwable $e) {
-            dd($e);
         }
     }
 }
