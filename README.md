@@ -61,15 +61,15 @@ class WelcomeNotification extends Notification
     
     public function toCustomSms($notifiable)
     {
-        return "Hello Laravel Commuty from Ivory Coast (Côte D'ivoire)";
+        return "Hello Laravel Community from Ivory Coast (Côte D'ivoire)";
     }
 }
 ```
 
 The `customsms` channel will automatically use the provider you have defined
 by default in your configuration file. It should be noted that a channel
-will be created for each provider supported by the package. See the list of
-channels supported.
+will be created for each provider supported by the package.
+[See the list of channels supported](https://github.com/gabeta/laravel-custom-sms-channels#provider-supporter-and-those-we-intend-to-implement).
 
 In order to let your Notification know which user(s) phone number you are targeting,
 add the `routeNotificationForCustomSms` method to your Notifiable model.
