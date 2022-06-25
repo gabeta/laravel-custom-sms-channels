@@ -47,9 +47,6 @@ php artisan vendor:publish --provider="Gabeta\CustomSmsChannels\CustomSmsChannel
 Now you can use the channel in your `via()` method inside the notification:
 
 ``` php
-use NotificationChannels\OneSignal\OneSignalChannel;
-use NotificationChannels\OneSignal\OneSignalMessage;
-use NotificationChannels\OneSignal\OneSignalWebButton;
 use Illuminate\Notifications\Notification;
 
 class WelcomeNotification extends Notification
