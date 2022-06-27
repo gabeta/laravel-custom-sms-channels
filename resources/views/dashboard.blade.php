@@ -38,7 +38,6 @@
 
                     <!-- LIST CONTACT -->
                     <div class="flex flex-col divide-y divide-gray-600 overflow-y-auto h-5/6">
-
                         <template x-for="message in messages" :key="message.id">
                             <div class="flex w-full p-4 space-x-4 cursor-pointer hover:opacity-80 transition">
                                 <div class="flex w-full space-x-2">
@@ -112,13 +111,12 @@
                                         </svg>
                                     </div>
                                     <div class="bg-white h-5/6 overflow-y-auto">
-                                        <template x-for="m in currentMessage.messages" :key="m.id">
+                                        <template x-for="(m, index) in currentMessage.messages" :key="index">
                                             <div class="flex flex-col space-y-2 p-2">
                                                 <div class="flex justify-center">
                                                     <span class="text-xss text-gray-800">mer, 8 juin à 14:32</span>
                                                 </div>
-                                                <div style="background:#f3f3f3" class="w-5/6 p-4 rounded-lg text-gray-900">
-                                                    bonjour
+                                                <div style="background:#f3f3f3" class="w-5/6 p-4 rounded-lg text-gray-900" x-text="m.message">
                                                 </div>
                                             </div>
                                         </template>
