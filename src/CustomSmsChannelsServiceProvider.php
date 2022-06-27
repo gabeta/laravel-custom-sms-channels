@@ -2,10 +2,13 @@
 
 namespace Gabeta\CustomSmsChannels;
 
+use Gabeta\CustomSmsChannels\Http\Controllers\PreviewDashboardController;
+use Gabeta\CustomSmsChannels\Http\Controllers\SmsListController;
 use GuzzleHttp\Client;
 use Illuminate\Container\Container;
 use Illuminate\Notifications\ChannelManager;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use RuntimeException;
 
@@ -34,6 +37,13 @@ class CustomSmsChannelsServiceProvider extends ServiceProvider
             return new CustomSmsManager($app, new Client());
         });
 
+        $this->configureRoutes();
+
+        $this->configureChannels();
+    }
+
+    protected function configureChannels()
+    {
         $providers = array_keys($this->app['config']['custom-sms-channels']['providers']);
 
         foreach ($providers as $provider) {
@@ -53,6 +63,21 @@ class CustomSmsChannelsServiceProvider extends ServiceProvider
         });
     }
 
+    protected function configureRoutes()
+    {
+        $preview = config('custom-sms-channels.preview.enable');
+
+        if ($preview) {
+            Route::group([
+                'domain' => config('custom-sms-channels.preview.domain'),
+                'prefix' => config('custom-sms-channels.preview.path'),
+            ], function () {
+                Route::get('/', PreviewDashboardController::class)->name('customsms.dashboard');
+                Route::get('/ajax-sms', SmsListController::class)->name('customsms.sms');
+            });
+        }
+    }
+
     /**
      * Bootstrap services.
      *
@@ -60,8 +85,14 @@ class CustomSmsChannelsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->loadViewsFrom(__DIR__.'/../resources/views/', 'customsms');
+
         $this->publishes([
             __DIR__.'/../config/custom-sms-channels.php' => config_path('custom-sms-channels.php'),
         ], 'config');
+
+        $this->publishes([
+            __DIR__.'/.../sub/assets' => public_path('vendor/courier'),
+        ], 'public');
     }
 }

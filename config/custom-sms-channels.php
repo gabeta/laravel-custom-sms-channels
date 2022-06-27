@@ -3,6 +3,14 @@
 return [
     'default' => env('CUSTOM_SMS_CHANNEL', 'sms_log'),
 
+    'preview' => [
+        'enable' => true,
+
+        'domain' => null,
+
+        'path' => '/customs-sms-dashboard'
+    ],
+
     'providers' => [
 
         'sms_log' => [
@@ -11,8 +19,6 @@ return [
                 'path' => storage_path('logs/custom-sms.log'),
                 'level' => 'info',
             ],
-
-            'preview' => false,
         ],
 
         'infobip' => [
