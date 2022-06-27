@@ -2,20 +2,16 @@
 
 namespace Gabeta\CustomSmsChannels\Channels;
 
-use Gabeta\CustomSmsChannels\PhoneNumber;
-use Illuminate\Notifications\Notification;
 use Infobip\Api\SendSmsApi;
 use Infobip\Model\SmsAdvancedTextualRequest;
 use Infobip\Model\SmsDestination;
 use Infobip\Model\SmsTextualMessage;
-use RuntimeException;
-use Throwable;
 
-class InfobipSmsChannel
+class InfobipSmsChannel extends ChannelAbstract
 {
-    private $client;
+    protected $client;
 
-    private $from;
+    protected $from;
 
     public function __construct(SendSmsApi $client, $from)
     {
@@ -23,35 +19,9 @@ class InfobipSmsChannel
         $this->client = $client;
     }
 
-    public function send($notifiable, Notification $notification)
+    public function sendMessage($phoneNumber, $content)
     {
-        if (method_exists($notifiable, 'routeNotificationForInfobip')) {
-            $phoneNumber = $notifiable->routeNotificationForInfobip();
-        } elseif (method_exists($notifiable, 'routeNotificationForCustomSms')) {
-            $phoneNumber = $notifiable->routeNotificationForCustomSms();
-        } else {
-            throw new RuntimeException(
-                'enable to access to method "routeNotificationForInfobip" or "routeNotificationForCustomSms" on '.get_class($notifiable)
-            );
-        }
-
-        if (! ($phoneNumber instanceof PhoneNumber)) {
-            throw new RuntimeException(
-                '"routeNotificationForInfobip" or "routeNotificationForCustomSms" must return PhoneNumber instance'
-            );
-        }
-
-        if (method_exists($notification, 'toInfobip')) {
-            $content = $notification->toInfobip($notifiable);
-        } elseif (method_exists($notification, 'toCustomSms')) {
-            $content = $notification->toCustomSms($notifiable);
-        } else {
-            throw new RuntimeException(
-                'enable to access to method "toInfobip" or "toCustomSms" on '.get_class($notifiable)
-            );
-        }
-
-        $destination = (new SmsDestination())->setTo($phoneNumber->getRouteNotification());
+        $destination = (new SmsDestination())->setTo($phoneNumber);
 
         $message = (new SmsTextualMessage())
                     ->setFrom($this->from)
@@ -61,9 +31,6 @@ class InfobipSmsChannel
         $request = (new SmsAdvancedTextualRequest())
                     ->setMessages([$message]);
 
-        try {
-            $this->client->sendSmsMessage($request);
-        } catch (Throwable $e) {
-        }
+        $this->client->sendSmsMessage($request);
     }
 }

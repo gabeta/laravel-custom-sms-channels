@@ -3,9 +3,14 @@
 namespace Gabeta\CustomSmsChannels;
 
 use Gabeta\CustomSmsChannels\Channels\InfobipSmsChannel;
+use Gabeta\CustomSmsChannels\Channels\LogSmsChannel;
+use Gabeta\CustomSmsChannels\Clients\LogClient;
 use GuzzleHttp\Client;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Log\LogManager;
 use Infobip\Api\SendSmsApi;
 use Infobip\Configuration;
+use InvalidArgumentException;
 
 class CustomSmsManager
 {
@@ -18,11 +23,33 @@ class CustomSmsManager
 
     protected $client;
 
-    public function __construct($app, Client $client)
+    public function __construct(Application $app, Client $client)
     {
         $this->app = $app;
 
         $this->client = $client;
+    }
+
+    public function getProvider($provider)
+    {
+        $providerMethod = 'createProvider'.str_replace('_', '', ucwords(ucfirst($provider), '_'));
+
+        if (! method_exists($this, $providerMethod)) {
+            throw new InvalidArgumentException("Provider [{$provider}] is not supported.");
+        }
+
+        return $this->{$providerMethod}();
+    }
+
+    public function getChannel($provider)
+    {
+        $channelMethod = 'createChannel'.str_replace('_', '', ucwords(ucfirst($provider), '_'));
+
+        if (! method_exists($this, $channelMethod)) {
+            throw new InvalidArgumentException("Provider [{$provider}] is not supported.");
+        }
+
+        return $this->{$channelMethod}();
     }
 
     public function createProviderInfobip()
@@ -40,26 +67,24 @@ class CustomSmsManager
     public function createChannelInfobip()
     {
         return new InfobipSmsChannel(
-            $this->app->make('channels.infobip'),
+            $this->app->make('providers.infobip'),
             $this->app['config']['custom-sms-channels.providers.infobip.send_from']
         );
     }
 
-    public function getProvider($provider)
+    public function createProviderSmsLog()
     {
-        $config = [
-            'infobip' => $this->createProviderInfobip(),
-        ];
-
-        return $config[$provider];
+        return new LogClient(
+            $this->app->make(LogManager::class),
+            $this->app['config']['custom-sms-channels.providers.sms_log.config']
+        );
     }
 
-    public function getChannel($channel)
+    public function createChannelSmsLog()
     {
-        $config = [
-            'infobip' => $this->createChannelInfobip(),
-        ];
-
-        return $config[$channel];
+        return new LogSmsChannel(
+            $this->app->make('providers.sms_log'),
+            $this->app['config']['app']['name']
+        );
     }
 }

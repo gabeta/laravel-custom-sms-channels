@@ -1,9 +1,20 @@
 <?php
 
 return [
-    'default' => 'infobip',
+    'default' => env('CUSTOM_SMS_CHANNEL', 'sms_log'),
 
     'providers' => [
+
+        'sms_log' => [
+            'config' => [
+                'driver' => 'single',
+                'path' => storage_path('logs/custom-sms.log'),
+                'level' => 'info',
+            ],
+
+            'preview' => false,
+        ],
+
         'infobip' => [
             'send_from' => env('INFOBIP_SEND_FROM'),
 

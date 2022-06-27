@@ -107,8 +107,8 @@ top the system will take care of the prefixing according to the provider.
 
 | Providers      | channel       | via method     | route notification method          |
 | -----------    | -----------   | --------       | --------                           |
+| log ✅          | log           | toSmsLog       | routeNotificationForSmsLog         |
 | infobip ✅      | infobip       | toInfobip      | routeNotificationForInfobip        | 
-| log ❌          | log           | toSmsLog       | routeNotificationForSmsLog         |
 | orange ❌       | orange        | toOrange       | routeNotificationForOrange         |
 
 You could use via or route notification method if you want behavior

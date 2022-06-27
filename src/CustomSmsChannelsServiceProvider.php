@@ -30,16 +30,14 @@ class CustomSmsChannelsServiceProvider extends ServiceProvider
             return new PhoneNumber();
         });
 
-        $this->app->singleton('customsms.manager', function () {
-            return new CustomSmsManager(function () {
-                return Container::getInstance();
-            }, new Client());
+        $this->app->bind('customsms.manager', function ($app) {
+            return new CustomSmsManager($app, new Client());
         });
 
         $providers = array_keys($this->app['config']['custom-sms-channels']['providers']);
 
         foreach ($providers as $provider) {
-            $this->app->singleton('channels.'.$provider, function ($app) use ($provider) {
+            $this->app->singleton('providers.'.$provider, function ($app) use ($provider) {
                 return $app->make('customsms.manager')->getProvider($provider);
             });
 
