@@ -53,12 +53,13 @@ class LogClient
                     'date' => $message['date'],
                 ];
             });
-
+            
             return [
                 'number' => trim($data['number']),
                 'messages' => $sms,
                 'lastMessage' => $sms->last(),
+                'lastMessageDate' => $sms->last()['date'],
             ];
-        });
+        })->sortByDesc('lastMessageDate')->values();
     }
 }

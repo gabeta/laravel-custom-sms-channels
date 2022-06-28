@@ -192,6 +192,10 @@
 
                 setCurrentMessage(message) {
                     this.currentMessage = message
+                },
+
+                fetchMessages() {
+
                 }
             }))
         })
