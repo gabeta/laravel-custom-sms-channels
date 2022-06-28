@@ -72,7 +72,7 @@ class CustomSmsChannelsServiceProvider extends ServiceProvider
                 'prefix' => config('custom-sms-channels.preview.path'),
             ], function () {
                 Route::get('/', PreviewDashboardController::class)->name('customsms.dashboard');
-                Route::get('/ajax-sms', SmsListController::class)->name('customsms.sms');
+                Route::get('/ajax-sms', SmsListController::class)->name('customsms.sms-list');
             });
         }
     }
