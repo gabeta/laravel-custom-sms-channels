@@ -38,19 +38,20 @@
 
                     <!-- LIST CONTACT -->
                     <div class="flex flex-col divide-y divide-gray-600 overflow-y-auto h-5/6">
-                        <template x-for="message in messages" :key="message.id">
-                            <div class="flex w-full p-4 space-x-4 cursor-pointer hover:opacity-80 transition">
+                        <template x-for="(message, index) in messages" :key="index">
+                            <div class="flex w-full p-4 space-x-4 cursor-pointer hover:opacity-80 transition"
+                                x-bind:class="currentMessage.number != message.number 'opacity-50'">
                                 <div class="flex w-full space-x-2">
                                     <div class="flex space-x-2 items-center">
-                                        <div class="h-4 w-4 rounded-full bg-blue-600">
-                                        </div>
+                                        <!--div class="h-4 w-4 rounded-full bg-blue-600">
+                                        </div-->
                                         <div style="background:#97989e" class="flex items-center justify-center h-12 w-12 rounded-full text-white font-bold">
                                             <span class="font-bold">B</span>
                                         </div>
                                     </div>
                                     <div class="flex flex-col space-y-1">
                                         <span class="text-lg font-bold text-white" x-text="message.number"></span>
-                                        <p class="truncate w-60 text-gray-400" x-text="message.lastMessage.message">
+                                        <p class="truncate w-60 text-gray-400" x-html="message.lastMessage.message">
                                         </p>
                                     </div>
                                 </div>
@@ -116,7 +117,7 @@
                                                 <div class="flex justify-center">
                                                     <span class="text-xss text-gray-800">mer, 8 juin à 14:32</span>
                                                 </div>
-                                                <div style="background:#f3f3f3" class="w-5/6 p-4 rounded-lg text-gray-900" x-text="m.message">
+                                                <div style="background:#f3f3f3" class="w-5/6 p-4 rounded-lg text-gray-900" x-html="m.message">
                                                 </div>
                                             </div>
                                         </template>

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Gabeta\CustomSmsChannels\Clients;
 
 use Illuminate\Log\LogManager;
@@ -21,24 +20,44 @@ class LogClient
         $this->logger->info($message);
     }
 
-    public function readContent()
+    public function read()
     {
-        $pattern = "/^\[(?<date>.*)\]\s(?<env>\w+)\.(?<type>\w+):(?<number>.*):(?<message>.*)/m";
         $content = file_get_contents($this->config['path']);
-        preg_match_all($pattern, $content, $matches, PREG_SET_ORDER, 0);
+        $content = (explode('@', preg_replace('#[\r\n]#', '@', $content)));
 
-        return collect($matches)->unique('number')->map(function ($data) use ($matches) {
-            $messages = collect($matches)->where('number', $data['number'])->map(function ($message) {
+        $pattern = "/^\[(?<date>.*)\]\s(?<env>\w+)\.(?<type>\w+):(?<number>.*):(?<message>.*)/m";
+        $parentId = 0;
+        $messages = collect();
+        foreach ($content as $key => $value) {
+            preg_match($pattern, $value, $matches);
+
+            if (count($matches)) {
+                $matches['id'] = $key;
+                $messages->add($matches);
+                $parentId = $key;
+            } else {
+                $messages = $messages->map(function ($message) use ($parentId, $value) {
+                    if ($message['id'] !== $parentId) {
+                        return $message;
+                    }
+
+                    return array_merge($message, ['message' => "{$message['message']} <br> {$value}"]);
+                });
+            }
+        }
+
+        return $messages->unique('number')->map(function ($data) use ($messages) {
+            $sms = collect($messages)->where('number', $data['number'])->map(function ($message) {
                 return [
                     'message' => trim($message['message']),
-                    'date' => $message['date']
+                    'date' => $message['date'],
                 ];
             });
 
             return [
                 'number' => trim($data['number']),
-                'messages' => $messages,
-                'lastMessage' => $messages->last()
+                'messages' => $sms,
+                'lastMessage' => $sms->last(),
             ];
         });
     }

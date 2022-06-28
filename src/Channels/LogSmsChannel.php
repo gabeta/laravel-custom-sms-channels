@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Gabeta\CustomSmsChannels\Channels;
 
 use Gabeta\CustomSmsChannels\Clients\LogClient;

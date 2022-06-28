@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Gabeta\CustomSmsChannels\Channels;
-
 
 use Gabeta\CustomSmsChannels\PhoneNumber;
 use Illuminate\Notifications\Notification;

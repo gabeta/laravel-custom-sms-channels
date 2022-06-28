@@ -5,7 +5,6 @@ namespace Gabeta\CustomSmsChannels;
 use Gabeta\CustomSmsChannels\Http\Controllers\PreviewDashboardController;
 use Gabeta\CustomSmsChannels\Http\Controllers\SmsListController;
 use GuzzleHttp\Client;
-use Illuminate\Container\Container;
 use Illuminate\Notifications\ChannelManager;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
