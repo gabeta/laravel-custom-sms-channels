@@ -9,7 +9,7 @@
 </head>
 <body>
     <div x-data="sms">
-        <div class="flex flex-col bg-gray-900 h-screen overflow-hidden p-10">
+        <div class="flex flex-col bg-gray-900 h-screen overflow-hidden py-10 px-40">
             <!-- HEAD -->
             <div class="w-full p-4 bg-gray-800 rounded-sm">
                 <b class="text-white">Laravel Custom SMS Channel Dashboard</b>
@@ -18,7 +18,7 @@
 
             <!-- BODY -->
             <div class="flex h-full rounded-sm">
-                <div class="flex flex-col space-y-8 bg-gray-800 w-4/12 p-4">
+                <div class="flex flex-col space-y-8 bg-gray-700 w-4/12 p-4">
                     <!-- OPTIONS GBLOBAL -->
                     <div class="flex justify-between w-full">
                         <div class="flex items-center space-x-4">
@@ -28,7 +28,7 @@
                             </svg>
                         </div>
                         <div class="flex space-x-2 items-center cursor-pointer hover:opacity-60 transition">
-                            <span style="color:#f85069" class="font-bold">Clear</span>
+                            <span class="font-bold text-[#f85069]">Clear</span>
                             <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                 <path fill="#f85069" d="M284.2 0C296.3 0 307.4 6.848 312.8 17.69L320 32H416C433.7 32 448 46.33 448 64C448 81.67 433.7 96 416 96H32C14.33 96 0 81.67 0 64C0 46.33 14.33 32 32 32H128L135.2 17.69C140.6 6.848 151.7 0 163.8 0H284.2zM31.1 128H416L394.8 466.1C393.2 492.3 372.3 512 346.9 512H101.1C75.75 512 54.77 492.3 53.19 466.1L31.1 128zM207 199L127 279C117.7 288.4 117.7 303.6 127 312.1C136.4 322.3 151.6 322.3 160.1 312.1L199.1 273.9V408C199.1 421.3 210.7 432 223.1 432C237.3 432 248 421.3 248 408V273.9L287 312.1C296.4 322.3 311.6 322.3 320.1 312.1C330.3 303.6 330.3 288.4 320.1 279L240.1 199C236.5 194.5 230.4 191.1 223.1 191.1C217.6 191.1 211.5 194.5 207 199V199z"/>
                             </svg>
@@ -45,7 +45,7 @@
                                     <div class="flex space-x-2 items-center">
                                         <!--div class="h-4 w-4 rounded-full bg-blue-600">
                                         </div-->
-                                        <div style="background:#97989e" class="flex items-center justify-center h-12 w-12 rounded-full text-white font-bold">
+                                        <div class="flex items-center justify-center h-12 w-12 rounded-full text-white font-bold bg-[#97989e]">
                                             <span class="font-bold">B</span>
                                         </div>
                                     </div>
@@ -65,7 +65,7 @@
                 </div>
 
                 <!-- CANVAS -->
-                <div class="flex flex-col space-y-4 bg-gray-700 w-8/12">
+                <div class="flex flex-col space-y-4 bg-gray-500 w-8/12">
                     <!-- BUTTON SWITCH -->
                     <div class="flex justify-end">
                         <div class="flex justify-end w-4/12 p-2 divide-x">
@@ -78,8 +78,8 @@
                                 <span>Iphone</span>
                             </button>
                             <button  x-on:click="platform = 'android'"
-                                     x-bind:class="platform == 'android' ? 'bg-gray-900' : 'opacity-25'"
-                                     class="flex space-x-2 items-center bg-gray-800  hover:opacity-80 transition p-2 rounded-tr-lg rounded-br-lg text-white">
+                                    x-bind:class="platform == 'android' ? 'bg-gray-900' : 'opacity-25'"
+                                    class="flex space-x-2 items-center bg-gray-800  hover:opacity-80 transition p-2 rounded-tr-lg rounded-br-lg text-white">
                                 <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                                     <path fill="#fff" d="M420.55,301.93a24,24,0,1,1,24-24,24,24,0,0,1-24,24m-265.1,0a24,24,0,1,1,24-24,24,24,0,0,1-24,24m273.7-144.48,47.94-83a10,10,0,1,0-17.27-10h0l-48.54,84.07a301.25,301.25,0,0,0-246.56,0L116.18,64.45a10,10,0,1,0-17.27,10h0l47.94,83C64.53,202.22,8.24,285.55,0,384H576c-8.24-98.45-64.54-181.78-146.85-226.55"/>
                                 </svg>
@@ -93,71 +93,104 @@
                     <div class="flex justify-center h-full">
                         <div class="relative">
                             <div class="absolute w-full h-full pt-10 pb-20 px-4">
-                                <div class="flex flex-col sw-full h-full p-1">
-                                    <div style="background:#f3f3f3" class="flex justify-between mt-1 border-b border-gray-300 p-2 rounded-tl-3xl rounded-tr-3xl">
-                                        <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
-                                            <path fill="#2563eb" d="M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l137.4 137.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z"/>
-                                        </svg>
-                                        <div class="flex flex-col space-y-1 items-center">
-                                            <div style="background:#97989e" class="flex items-center justify-center h-10 w-10 rounded-full text-white font-bold">
-                                                <span class="font-bold">B</span>
+                                <!-- IPHONE MOBILE -->
+                                    <div x-show="platform == 'ios'" class="flex flex-col h-full p-1">
+                                        <div class="flex justify-between mt-1 border-b border-gray-300 p-2 rounded-tl-3xl rounded-tr-3xl bg-[#f3f3f3]">
+                                            <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+                                                <path fill="#2563eb" d="M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l137.4 137.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z"/>
+                                            </svg>
+                                            <div class="flex flex-col space-y-1 items-center">
+                                                <div class="flex items-center justify-center h-10 w-10 rounded-full text-white font-bold bg-[#97989e]">
+                                                    <span class="font-bold">B</span>
+                                                </div>
+                                                <span class="font-bold text-gray-900 text-xs">{{ config('app.name') }}</span>
                                             </div>
-                                            <span class="font-bold text-gray-900 text-xs">{{ config('app.name') }}</span>
+                                            <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                                <path fill="#2563eb" d="M384 112v288c0 26.51-21.49 48-48 48h-288c-26.51 0-48-21.49-48-48v-288c0-26.51 21.49-48 48-48h288C362.5 64 384 85.49 384 112zM576 127.5v256.9c0 25.5-29.17 40.39-50.39 25.79L416 334.7V177.3l109.6-75.56C546.9 87.13 576 102.1 576 127.5z"/>
+                                            </svg>
                                         </div>
-                                        <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-                                            <path fill="#2563eb" d="M384 112v288c0 26.51-21.49 48-48 48h-288c-26.51 0-48-21.49-48-48v-288c0-26.51 21.49-48 48-48h288C362.5 64 384 85.49 384 112zM576 127.5v256.9c0 25.5-29.17 40.39-50.39 25.79L416 334.7V177.3l109.6-75.56C546.9 87.13 576 102.1 576 127.5z"/>
-                                        </svg>
-                                    </div>
-                                    <div class="bg-white h-5/6 overflow-y-auto">
-                                        <template x-for="(m, index) in currentMessage.messages" :key="index">
-                                            <div class="flex flex-col space-y-2 p-2">
-                                                <div class="flex justify-center">
-                                                    <span class="text-xss text-gray-800">mer, 8 juin à 14:32</span>
+                                        <div class="bg-white h-5/6 overflow-y-auto">
+                                            <template x-for="(m, index) in currentMessage.messages" :key="index">
+                                                <div class="flex flex-col space-y-2 p-2">
+                                                    <div class="flex justify-center">
+                                                        <span class="text-[0.60rem] text-gray-800">mer, 8 juin à 14:32</span>
+                                                    </div>
+                                                    <div class="w-5/6 p-4 rounded-lg text-gray-900 bg-[#f3f3f3]" x-html="m.message">
+                                                    </div>
                                                 </div>
-                                                <div style="background:#f3f3f3" class="w-5/6 p-4 rounded-lg text-gray-900" x-html="m.message">
-                                                </div>
-                                            </div>
-                                        </template>
-                                    </div>
-                                    <div class="flex h-1/6 items-end bg-white px-4 pb-1">
-                                        <div class="flex items-center w-full space-x-4">
-                                            <div class="flex items-center space-x-2">
-                                                <svg class="w-5 h-5" id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 23">
-                                                    <path d="M22.26,2.57H18.83l-.14-1.15A1.25,1.25,0,0,0,17.44.31h-9A1.26,1.26,0,0,0,7.24,1.42L7.11,2.57H3.75A3.73,3.73,0,0,0,0,6.31V19.12a3.74,3.74,0,0,0,3.74,3.75H22.26A3.75,3.75,0,0,0,26,19.12V6.31A3.74,3.74,0,0,0,22.26,2.57Z" fill="#7b7b7c"/><path d="M13,6.28a5.83,5.83,0,1,0,5.82,5.82A5.83,5.83,0,0,0,13,6.28Zm0,10.94a5.12,5.12,0,1,1,5.12-5.12A5.11,5.11,0,0,1,13,17.22Z" fill="#d6d6d6"/><circle cx="19.86" cy="7.62" r="1.04" fill="#d6d6d6"/>
-                                                </svg>
-                                                <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 40 23">
-                                                    <g style="isolation:isolate">
-                                                        <g id="Calque_1" data-name="Calque 1">
-                                                            <rect x="0.84" y="0.28" width="34.76" height="21.5" rx="10.75" fill="#7b7b7c"/>
-                                                            <path d="M39.23,11A10.75,10.75,0,0,1,28.48,21.79H27.37a10.76,10.76,0,0,0,0-21.51h1.11A10.76,10.76,0,0,1,39.23,11Z" fill="#7b7b7c"/>
-                                                            <rect x="17.49" y="6.48" width="1.46" height="14.41" rx="0.73" transform="translate(31.9 -4.53) rotate(90)" fill="#f3f3f3"/>
-                                                            <image width="39" height="43" transform="translate(3 -11)" opacity="0.15" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACcAAAArCAYAAAD7YZFOAAAACXBIWXMAAAsSAAALEgHS3X78AAACVklEQVRYR+2X25LjIBBDRZL//+OYeZhVVsh9IZet2YdRFQU2BB+rG4LHnBP/qy7dgJ/UL9yrunUDIo0xRtU/P5TIY3eeDijTO6BbcAa2C/mY+FXAFk7AvPY2IEDSfhmyhEvAKlgHmn7vGcAUzsAcyu+pZlLYtw0YwiVgWi7SdhHmCNrs3wLc3Uoc6oIYUJ0a+IY6/owl5AAwxxijAzzBbbh2xRmOv1GntO+Qe61j1I5z6hrL1a4phbsjDvvBsZ17HZy76ICEVOfUpbvMxVB7GqSq4EZQK9hN2vpAdS1yblkYlXsZnE+q+aPu3aTNfDrkGlgXCfvoLPtDdWEFVjCH0/BSDCulcFy1nKt0bwdOlYWYbQIw1+hW5lrpXgbHt4vkTioosObUFetepy/xcC6TbgOZGBJt670s5L7dMA+9fE8SHMkqOH+rCCwaB8SwDuT1SZ1zDqSF4dK8UtAI4inAE1yy50RQLHesoJoC1CmMO6pWa5RnCuTh0t8AK2zmaqmdrUTBBs6AFZw6iqAuFcLNOaetHncv+nuK/hk05FFeluqc04nUvYH11DGRHwKinNwCTOHEPc+9w4dK0cT3HI0AS8jOOZWDedg9rMBfmMq9FLKEC9wDVkhO7Jutj/XyGecCQDqkLmrIo4V0SB2t3nB/beECaQj5IG4x0UbrgFFYQ7Vf/FTxge3F5bl1AsxOwttwAPzkoDDeVjnc0n7nA2eRbc4+Ka8797Qu9ZRzqsDFpVva+oBHu/ugBt6Ao6JDYqcdMOADcNQO5C4U9TG4f6HuJPyj+oV7VV/4kIwrre1d/gAAAABJRU5ErkJggg==" style="mix-blend-mode:multiply"/>
-                                                            <rect x="19.98" y="3.42" width="1.46" height="14.41" rx="0.73" transform="matrix(0.87, -0.5, 0.5, 0.87, -2.54, 11.78)" fill="#f3f3f3"/>
-                                                            <image width="39" height="43" transform="translate(-2 -11)" opacity="0.15" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACcAAAArCAYAAAD7YZFOAAAACXBIWXMAAAsSAAALEgHS3X78AAACRElEQVRYR+2XUXOEIAyEF6///xdX04drvGVNINhO24fuTCbKgXyXBMFmZvir2mYdflP/cHf1NuuwotZay36zG8XdbozpNAKKtAJ5Gy6AmkF2E1Ugb8EJWBOfiScyYA64DEdg7GeARp6vh4BLC0LAFIrvVQzVtbfWWgZYhkvAMmNZYufvGWAJbgC2Bd77aSoP8t6ufTtN4SZgaho5jlTDC+ygfgY859HoTeFECvYQz/AMttMzHLSDizSES6LGYG4KCPTp9GdweyPv7Z0qkcvS+QiM4YAnGEfN06kRDpXCJTuAT87RekMP54uC6wp4QmxB+ymtu++IHMM9aNyGV9S4zrhUhprBVWvOAT2y/OpQMAYcKoQL9k4Fy+rOU8rvOK6zofRVsmGsKqQb12UGY+JTjeCilFZMZWJAAQyY1xwrg3XxhJ5OrrvMdOypKlwTr9KJDrJd7rmv9w91gSseu30Cn1DH7GQMqKv4BLt9KvlUlhY9ZXjbCHCaUqAOxw9y2/GKmEI6zDt6wKgOU13gzMyS1Eap3D/bdMPnyDlgVnPpUb0SuSiNegQ68BL/AU1ttHpTjeB8YEMP5m3eR08iDKer1dADfvkDx8hrhLwtglPIS0pnn4YhnNSdiefCN1xfI1oC0QIYQrlmkePJD1zPajO4zKZRAzD+qA6O6Xyd7aVAAoQFMGACB1wA3a9uZ+ckVTCgAAeEgHod6VJfK2BAEQ4I99wq3DKUqwznKh4MANyHci3DuUaQX4Vy3Yb7Cc2+IX5V/3B39QGDXn49kSYn1gAAAABJRU5ErkJggg==" style="mix-blend-mode:multiply"/>
-                                                            <rect x="8.72" y="9.75" width="14.41" height="1.46" rx="0.73" transform="translate(-1.11 19.03) rotate(-60)" fill="#f3f3f3"/></g>
-                                                    </g>
-                                                </svg>
-                                            </div>
-                                            <div class="flex justify-between border px-2 py-1 rounded-full w-full opacity-60">
-                                                <span class="text-sm font-bold text-gray-600">Message</span>
-                                                <div style="background:#34c659" class="flex items-center justify-center h-6 w-6  p-1 rounded-full text-white font-bold">
-                                                    <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                                        <path fill="#ffffff" d="M310.6 182.6c-12.51 12.51-32.76 12.49-45.25 0L192 109.3V480c0 17.69-14.31 32-32 32s-32-14.31-32-32V109.3L54.63 182.6c-12.5 12.5-32.75 12.5-45.25 0s-12.5-32.75 0-45.25l128-128c12.5-12.5 32.75-12.5 45.25 0l128 128C323.1 149.9 323.1 170.1 310.6 182.6z"/>
+                                            </template>
+                                        </div>
+                                        <div class="flex h-1/6 items-end bg-white px-4 pb-1">
+                                            <div class="flex items-center w-full space-x-4">
+                                                <div class="flex items-center space-x-2">
+                                                    <svg class="w-5 h-5" id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 23">
+                                                        <path d="M22.26,2.57H18.83l-.14-1.15A1.25,1.25,0,0,0,17.44.31h-9A1.26,1.26,0,0,0,7.24,1.42L7.11,2.57H3.75A3.73,3.73,0,0,0,0,6.31V19.12a3.74,3.74,0,0,0,3.74,3.75H22.26A3.75,3.75,0,0,0,26,19.12V6.31A3.74,3.74,0,0,0,22.26,2.57Z" fill="#7b7b7c"/><path d="M13,6.28a5.83,5.83,0,1,0,5.82,5.82A5.83,5.83,0,0,0,13,6.28Zm0,10.94a5.12,5.12,0,1,1,5.12-5.12A5.11,5.11,0,0,1,13,17.22Z" fill="#d6d6d6"/><circle cx="19.86" cy="7.62" r="1.04" fill="#d6d6d6"/>
+                                                    </svg>
+                                                    <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 40 23">
+                                                        <g style="isolation:isolate">
+                                                            <g id="Calque_1" data-name="Calque 1">
+                                                                <rect x="0.84" y="0.28" width="34.76" height="21.5" rx="10.75" fill="#7b7b7c"/>
+                                                                <path d="M39.23,11A10.75,10.75,0,0,1,28.48,21.79H27.37a10.76,10.76,0,0,0,0-21.51h1.11A10.76,10.76,0,0,1,39.23,11Z" fill="#7b7b7c"/>
+                                                                <rect x="17.49" y="6.48" width="1.46" height="14.41" rx="0.73" transform="translate(31.9 -4.53) rotate(90)" fill="#f3f3f3"/>
+                                                                <image width="39" height="43" transform="translate(3 -11)" opacity="0.15" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACcAAAArCAYAAAD7YZFOAAAACXBIWXMAAAsSAAALEgHS3X78AAACVklEQVRYR+2X25LjIBBDRZL//+OYeZhVVsh9IZet2YdRFQU2BB+rG4LHnBP/qy7dgJ/UL9yrunUDIo0xRtU/P5TIY3eeDijTO6BbcAa2C/mY+FXAFk7AvPY2IEDSfhmyhEvAKlgHmn7vGcAUzsAcyu+pZlLYtw0YwiVgWi7SdhHmCNrs3wLc3Uoc6oIYUJ0a+IY6/owl5AAwxxijAzzBbbh2xRmOv1GntO+Qe61j1I5z6hrL1a4phbsjDvvBsZ17HZy76ICEVOfUpbvMxVB7GqSq4EZQK9hN2vpAdS1yblkYlXsZnE+q+aPu3aTNfDrkGlgXCfvoLPtDdWEFVjCH0/BSDCulcFy1nKt0bwdOlYWYbQIw1+hW5lrpXgbHt4vkTioosObUFetepy/xcC6TbgOZGBJt670s5L7dMA+9fE8SHMkqOH+rCCwaB8SwDuT1SZ1zDqSF4dK8UtAI4inAE1yy50RQLHesoJoC1CmMO6pWa5RnCuTh0t8AK2zmaqmdrUTBBs6AFZw6iqAuFcLNOaetHncv+nuK/hk05FFeluqc04nUvYH11DGRHwKinNwCTOHEPc+9w4dK0cT3HI0AS8jOOZWDedg9rMBfmMq9FLKEC9wDVkhO7Jutj/XyGecCQDqkLmrIo4V0SB2t3nB/beECaQj5IG4x0UbrgFFYQ7Vf/FTxge3F5bl1AsxOwttwAPzkoDDeVjnc0n7nA2eRbc4+Ka8797Qu9ZRzqsDFpVva+oBHu/ugBt6Ao6JDYqcdMOADcNQO5C4U9TG4f6HuJPyj+oV7VV/4kIwrre1d/gAAAABJRU5ErkJggg==" style="mix-blend-mode:multiply"/>
+                                                                <rect x="19.98" y="3.42" width="1.46" height="14.41" rx="0.73" transform="matrix(0.87, -0.5, 0.5, 0.87, -2.54, 11.78)" fill="#f3f3f3"/>
+                                                                <image width="39" height="43" transform="translate(-2 -11)" opacity="0.15" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACcAAAArCAYAAAD7YZFOAAAACXBIWXMAAAsSAAALEgHS3X78AAACRElEQVRYR+2XUXOEIAyEF6///xdX04drvGVNINhO24fuTCbKgXyXBMFmZvir2mYdflP/cHf1NuuwotZay36zG8XdbozpNAKKtAJ5Gy6AmkF2E1Ugb8EJWBOfiScyYA64DEdg7GeARp6vh4BLC0LAFIrvVQzVtbfWWgZYhkvAMmNZYufvGWAJbgC2Bd77aSoP8t6ufTtN4SZgaho5jlTDC+ygfgY859HoTeFECvYQz/AMttMzHLSDizSES6LGYG4KCPTp9GdweyPv7Z0qkcvS+QiM4YAnGEfN06kRDpXCJTuAT87RekMP54uC6wp4QmxB+ymtu++IHMM9aNyGV9S4zrhUhprBVWvOAT2y/OpQMAYcKoQL9k4Fy+rOU8rvOK6zofRVsmGsKqQb12UGY+JTjeCilFZMZWJAAQyY1xwrg3XxhJ5OrrvMdOypKlwTr9KJDrJd7rmv9w91gSseu30Cn1DH7GQMqKv4BLt9KvlUlhY9ZXjbCHCaUqAOxw9y2/GKmEI6zDt6wKgOU13gzMyS1Eap3D/bdMPnyDlgVnPpUb0SuSiNegQ68BL/AU1ttHpTjeB8YEMP5m3eR08iDKer1dADfvkDx8hrhLwtglPIS0pnn4YhnNSdiefCN1xfI1oC0QIYQrlmkePJD1zPajO4zKZRAzD+qA6O6Xyd7aVAAoQFMGACB1wA3a9uZ+ckVTCgAAeEgHod6VJfK2BAEQ4I99wq3DKUqwznKh4MANyHci3DuUaQX4Vy3Yb7Cc2+IX5V/3B39QGDXn49kSYn1gAAAABJRU5ErkJggg==" style="mix-blend-mode:multiply"/>
+                                                                <rect x="8.72" y="9.75" width="14.41" height="1.46" rx="0.73" transform="translate(-1.11 19.03) rotate(-60)" fill="#f3f3f3"/></g>
+                                                        </g>
                                                     </svg>
                                                 </div>
+                                                <div class="flex justify-between border px-2 py-1 rounded-full w-full opacity-60">
+                                                    <span class="text-sm font-bold text-gray-600">Message</span>
+                                                    <div class="flex items-center justify-center h-6 w-6  p-1 rounded-full text-white font-bold bg-[#34c659]">
+                                                        <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                                            <path fill="#ffffff" d="M310.6 182.6c-12.51 12.51-32.76 12.49-45.25 0L192 109.3V480c0 17.69-14.31 32-32 32s-32-14.31-32-32V109.3L54.63 182.6c-12.5 12.5-32.75 12.5-45.25 0s-12.5-32.75 0-45.25l128-128c12.5-12.5 32.75-12.5 45.25 0l128 128C323.1 149.9 323.1 170.1 310.6 182.6z"/>
+                                                        </svg>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                <!-- IPHONE MOBILE -->
+                                <!-- ANDROID MOBILE -->
+                                    <div  x-show="platform == 'android'" class="flex flex-col h-full mr-1 opacity-80">
+                                        <div class="flex justify-between w-full px-4 py-2">
+                                           <div class="flex space-x-4 items-center">
+                                                <svg class="w-5 h-5" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><rect x="155.14" y="-28.39" width="33.43" height="336.97" transform="translate(140.68 -79.42) rotate(42.73)" fill="#222"/><rect x="173.81" y="183.62" width="33.43" height="370.33" transform="translate(590.69 479.06) rotate(132.73)" fill="#222"/></svg>
+                                                <span>Boty</span>
+                                           </div>
+                                           <div class="flex space-x-4 items-center">
+                                                <svg class="w-5 h-5" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M421.76,45.92c-38.82-32-158.09,6-212.27,8C92.19,58.34.65,157.06,5.07,274.35S108.2,483,225.49,478.62c117.14-4.42,208.69-103,204.27-220.27C427.39,195.39,466.79,83.23,421.76,45.92ZM406.49,258.3c3.91,103.9-77.12,191.28-180.87,195.19a188.22,188.22,0,0,1-195.19-181c-3.91-103.9,77.12-191.12,181-195,48-1.81,153.58-35.53,188-7.08C439.33,103.22,404.39,202.58,406.49,258.3Z" fill="#222"/><rect x="113.29" y="196.35" width="178.65" height="144.34" rx="1.39" transform="translate(-9.97 7.82) rotate(-2.16)" fill="#222"/><rect x="330.92" y="202.31" width="22.33" height="121.89" transform="translate(-9.67 13.07) rotate(-2.16)" fill="#222"/><rect x="283.95" y="218.87" width="58.15" height="90.97" transform="translate(-9.73 11.98) rotate(-2.16)" fill="#222"/></svg>
+                                                <svg class="w-5 h-5" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M93.11,18.65C23.9,95,23.92,230.84,99.3,343.32c85.18,127.14,234.33,176.65,334,111.23" fill="none" stroke="#222" stroke-miterlimit="10" stroke-width="14"/><polyline points="88 20 101 20.6 185.87 40.76 188.91 86.36 42.23 174.38" fill="none" stroke="#222" stroke-miterlimit="10" stroke-width="14"/><polyline points="428.54 458.44 429.56 449.58 427.19 362.38 383.17 350.07 267 475.64" fill="none" stroke="#222" stroke-miterlimit="10" stroke-width="14"/></svg>
+                                                <svg  class="w-5 h-5" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><circle cx="160" cy="180.29" r="104.07" fill="none" stroke="#222" stroke-miterlimit="10" stroke-width="16"/><rect x="187.2" y="348.22" width="250.91" height="19.32" transform="translate(359.15 -115.06) rotate(46.76)" fill="#222"/></svg>
+                                                <svg class="w-5 h-5"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><circle cx="223.63" cy="60.6" r="54.19" fill="#222"/><circle cx="223.63" cy="256.49" r="54.19" fill="#222"/><circle cx="223.63" cy="452.37" r="54.19" fill="#222"/></svg>
+                                           </div>
+                                        </div>
+                                        <div class="flex flex-col space-y-4 h-5/6 p-2 overflow-y-auto">
+                                            <template  x-for="(m, index) in currentMessage.messages" >
+                                                <div :key="index" class="flex flex-col space-y-2">
+                                                    <div class="flex justify-center">
+                                                        <span class="text-[0.60rem] text-gray-800">mer, 8 juin à 14:32</span>
+                                                    </div>
+                                                    <div class="flex space-x-4 text-white">
+                                                        <div class="flex items-center justify-center h-10 w-10 rounded-full  font-bold bg-[#97989e]">
+                                                            <span class="font-bold">B</span>
+                                                        </div>
+                                                        <div class="w-5/6 bg-[#3d80db] rounded-tl-lg rounded-tr-lg rounded-br-lg p-2" x-html="m.message"></div>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                <!-- ANDROID MOBILE -->
                             </div>
-                            <img class="h-160 xl:h-176"
-                                 x-show="platform == 'ios'"
-                                 style="height: 40rem;"
-                                 src="/sms-custom/big-iphone.svg" alt="Iphone">
-                            <img class="h-160 xl:h-176"
-                                 x-show="platform == 'android'"
-                                 style="height: 40rem;"
-                                 src="/sms-custom/big-android.svg" alt="Android">
+                            <img class="h-[40rem] xl:h-[44rem]"
+                                x-show="platform == 'ios'"
+                                class="h-[40rem]"
+                                src="/vendor/customsms/img/big-iphone.svg" alt="Iphone">
+                            <img class="h-[40rem] xl:h-[44rem]"
+                                x-show="platform == 'android'"
+                                class="h-[40rem]"
+                                src="/vendor/customsms/img/big-android.svg" alt="Android">
                         </div>
                     </div>
                     <!--BIG MOBILE -->
@@ -165,7 +198,8 @@
                     <!-- SMALL MOBILE -->
                     <div class="flex justify-end p-2">
                         <div class="w-10 bg-gray-600 p-1 rounded-lg">
-                            <img src="/sms-custom/small-iphone.png" alt="">
+                            <img  x-show="platform == 'ios'" src="/vendor/customsms/img/small-iphone.png" alt="">
+                            <img  x-show="platform == 'android'" src="/vendor/customsms/img/small-android.png" alt="">
                         </div>
                     </div>
                     <!-- SMALL MOBILE -->
@@ -177,7 +211,7 @@
     </div>
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="/vendor/customsms/js/alpine.js"></script>
 
     <script>
         document.addEventListener('alpine:init', () => {
@@ -192,10 +226,6 @@
 
                 setCurrentMessage(message) {
                     this.currentMessage = message
-                },
-
-                fetchMessages() {
-
                 }
             }))
         })
