@@ -86,12 +86,14 @@ class CustomSmsChannelsServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views/', 'customsms');
 
-        $this->publishes([
-            __DIR__.'/../config/custom-sms-channels.php' => config_path('custom-sms-channels.php'),
-        ], 'config');
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../config/custom-sms-channels.php' => config_path('custom-sms-channels.php'),
+            ], 'config');
 
-        $this->publishes([
-            __DIR__.'/.../sub/assets' => public_path('vendor/courier'),
-        ], 'public');
+            $this->publishes([
+                __DIR__.'/.../resources/assets' => public_path('vendor/customsms'),
+            ], 'public');
+        }
     }
 }

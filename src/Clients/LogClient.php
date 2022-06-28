@@ -53,7 +53,7 @@ class LogClient
                     'date' => $message['date'],
                 ];
             });
-            
+
             return [
                 'number' => trim($data['number']),
                 'messages' => $sms,
