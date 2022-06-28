@@ -92,7 +92,7 @@ class CustomSmsChannelsServiceProvider extends ServiceProvider
             ], 'config');
 
             $this->publishes([
-                __DIR__.'/.../resources/assets' => public_path('vendor/customsms'),
+                __DIR__.'/../resources/public/' => public_path('vendor/customsms'),
             ], 'public');
         }
     }
