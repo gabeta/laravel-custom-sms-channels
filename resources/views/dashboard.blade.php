@@ -12,7 +12,7 @@
         <div class="flex flex-col bg-gray-900 h-screen overflow-hidden p-10">
             <!-- HEAD -->
             <div class="w-full p-4 bg-gray-800 rounded-sm">
-                <b class="text-white"> Inbox</b>
+                <b class="text-white">Laravel Custom SMS Channel Dashboard</b>
             </div>
             <!-- HEAD -->
 
@@ -22,7 +22,7 @@
                     <!-- OPTIONS GBLOBAL -->
                     <div class="flex justify-between w-full">
                         <div class="flex items-center space-x-4">
-                            <span class="text-lg font-bold text-white" x-text="'SMS (' + messages.length + ')'"></span>
+                            <span class="text-lg font-bold text-white" x-text="'Inbox (' + messages.length + ')'"></span>
                             <svg class="h-4 w-4 hover:opacity-60 transition cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                 <path fill="#2563eb" d="M256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512C201.7 512 151.2 495 109.7 466.1C95.2 455.1 91.64 436 101.8 421.5C111.9 407 131.8 403.5 146.3 413.6C177.4 435.3 215.2 448 256 448C362 448 448 362 448 256C448 149.1 362 64 256 64C202.1 64 155 85.46 120.2 120.2L151 151C166.1 166.1 155.4 192 134.1 192H24C10.75 192 0 181.3 0 168V57.94C0 36.56 25.85 25.85 40.97 40.97L74.98 74.98C121.3 28.69 185.3 0 255.1 0L256 0zM256 128C269.3 128 280 138.7 280 152V246.1L344.1 311C354.3 320.4 354.3 335.6 344.1 344.1C335.6 354.3 320.4 354.3 311 344.1L239 272.1C234.5 268.5 232 262.4 232 256V152C232 138.7 242.7 128 256 128V128z"/>
                             </svg>
@@ -39,8 +39,8 @@
                     <!-- LIST CONTACT -->
                     <div class="flex flex-col divide-y divide-gray-600 overflow-y-auto h-5/6">
                         <template x-for="(message, index) in messages" :key="index">
-                            <div class="flex w-full p-4 space-x-4 cursor-pointer hover:opacity-80 transition"
-                                x-bind:class="currentMessage.number != message.number 'opacity-50'">
+                            <div @click="setCurrentMessage(message)" class="flex w-full p-4 space-x-4 cursor-pointer hover:opacity-80 transition"
+                                x-bind:class="currentMessage.number != message.number ? 'opacity-40' : ''">
                                 <div class="flex w-full space-x-2">
                                     <div class="flex space-x-2 items-center">
                                         <!--div class="h-4 w-4 rounded-full bg-blue-600">
@@ -55,12 +55,9 @@
                                         </p>
                                     </div>
                                 </div>
-                                <i class="text-sm text-gray-500">hier</i>
-                                <div class="flex items-end">
-                                    <svg class="h-3 w-3 cursor-pointer hover:opacity-60 transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                        <path fill="#f85069" d="M284.2 0C296.3 0 307.4 6.848 312.8 17.69L320 32H416C433.7 32 448 46.33 448 64C448 81.67 433.7 96 416 96H32C14.33 96 0 81.67 0 64C0 46.33 14.33 32 32 32H128L135.2 17.69C140.6 6.848 151.7 0 163.8 0H284.2zM31.1 128H416L394.8 466.1C393.2 492.3 372.3 512 346.9 512H101.1C75.75 512 54.77 492.3 53.19 466.1L31.1 128zM207 199L127 279C117.7 288.4 117.7 303.6 127 312.1C136.4 322.3 151.6 322.3 160.1 312.1L199.1 273.9V408C199.1 421.3 210.7 432 223.1 432C237.3 432 248 421.3 248 408V273.9L287 312.1C296.4 322.3 311.6 322.3 320.1 312.1C330.3 303.6 330.3 288.4 320.1 279L240.1 199C236.5 194.5 230.4 191.1 223.1 191.1C217.6 191.1 211.5 194.5 207 199V199z"/>
-                                    </svg>
-                                </div>
+                                <i class="text-sm text-gray-500">
+                                    hier
+                                </i>
                             </div>
                         </template>
                     </div>
@@ -191,6 +188,10 @@
 
                 init() {
                     this.currentMessage = this.messages[0]
+                },
+
+                setCurrentMessage(message) {
+                    this.currentMessage = message
                 }
             }))
         })
