@@ -18,7 +18,7 @@
         }
     ],
     "require": {
-        "php": "^7.4|^8.1",
+        "php": "^8.0",
         "guzzlehttp/guzzle": "^7.4",
         "illuminate/contracts": "^8.0|^9.0",
         "illuminate/notifications": "^8.0|^9.0",
@@ -29,7 +29,7 @@
         "infobip/infobip-api-php-client": "^3.2",
         "nunomaduro/collision": "^6.0",
         "nunomaduro/larastan": "^2.0.1",
-        "orchestra/testbench": "^5.0|^6.0|^7.0",
+        "orchestra/testbench": "^6.23|^7.0",
         "pestphp/pest": "^1.21",
         "pestphp/pest-plugin-laravel": "^1.1",
         "phpstan/extension-installer": "^1.1",
