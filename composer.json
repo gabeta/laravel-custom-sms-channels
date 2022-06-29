@@ -28,7 +28,7 @@
         "friendsofphp/php-cs-fixer": "^3.8",
         "infobip/infobip-api-php-client": "^3.2",
         "nunomaduro/collision": "^5.10.0|^6.0",
-        "nunomaduro/larastan": "^2.0.1",
+        "nunomaduro/larastan": "^1.0|^2.0.1",
         "orchestra/testbench": "^6.23|^7.0",
         "pestphp/pest": "^1.21",
         "pestphp/pest-plugin-laravel": "^1.1",

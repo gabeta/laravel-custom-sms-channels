@@ -20,12 +20,15 @@ jobs:
           - laravel: 7.*
             testbench: 5.*
             phpunit: '^8.5.8|^9.3.3'
+            larastan: '^1.*'
           - laravel: 8.*
             testbench: 6.*
             phpunit: '^9.3.3'
+            larastan: '^2.*'
           - laravel: 9.*
             testbench: 7.*
             phpunit: '^9.5'
+            larastan: '^2.*'
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
