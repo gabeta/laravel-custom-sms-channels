@@ -49,7 +49,7 @@ class LogClient
         return $messages->unique('number')->map(function ($data) use ($messages) {
             $sms = collect($messages)->where('number', $data['number'])->map(function ($message) {
                 return [
-                    'message' => trim($message['message']),
+                    'message' => $this->autoLinkText(trim($message['message'])),
                     'date' => $message['date'],
                 ];
             });
@@ -61,5 +61,26 @@ class LogClient
                 'lastMessageDate' => $sms->last()['date'],
             ];
         })->sortByDesc('lastMessageDate')->values();
+    }
+
+    public function clear() 
+    {
+        file_put_contents($this->config['path'], '');
+    }
+
+    protected function autoLinkText($text)
+    {
+        $pattern = "/(?i)\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))/";
+    
+       return preg_replace_callback($pattern, $this->formattedLinkToHtml(), $text);
+    }
+
+    protected function formattedLinkToHtml() 
+    {
+        return function ($matches) {
+            $url = array_shift($matches);
+
+            return sprintf('<a target="_blank" rel="nofollow" href="%s">%s</a>', $url, $url);
+        };
     }
 }

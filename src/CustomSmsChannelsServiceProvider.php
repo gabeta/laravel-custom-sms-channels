@@ -3,7 +3,6 @@
 namespace Gabeta\CustomSmsChannels;
 
 use Gabeta\CustomSmsChannels\Http\Controllers\PreviewDashboardController;
-use Gabeta\CustomSmsChannels\Http\Controllers\SmsListController;
 use GuzzleHttp\Client;
 use Illuminate\Notifications\ChannelManager;
 use Illuminate\Support\Facades\Notification;
@@ -71,8 +70,9 @@ class CustomSmsChannelsServiceProvider extends ServiceProvider
                 'domain' => config('custom-sms-channels.preview.domain'),
                 'prefix' => config('custom-sms-channels.preview.path'),
             ], function () {
-                Route::get('/', PreviewDashboardController::class)->name('customsms.dashboard');
-                Route::get('/ajax-sms', SmsListController::class)->name('customsms.sms-list');
+                Route::get('/', [PreviewDashboardController::class, 'index'])->name('customsms.dashboard');
+                Route::get('/sms-list', [PreviewDashboardController::class, 'smsList'])->name('customsms.sms-list');
+                Route::get('/clear-sms', [PreviewDashboardController::class, 'clearSms'])->name('customsms.clear-sms');
             });
         }
     }
