@@ -18,17 +18,20 @@ jobs:
         stability: [prefer-lowest, prefer-stable]
         include:
           - laravel: 7.*
-            testbench: 5.*
+            testbench: '5.*'
             phpunit: '^8.5.8|^9.3.3'
             larastan: '^1.*'
+            php-cs-fixer: '^3.4'
           - laravel: 8.*
-            testbench: 6.*
-            phpunit: '^9.3.3'
-            larastan: '^2.*'
+            testbench: '6.*'
+            phpunit: '^8.5.8|^9.3.3'
+            larastan: '^1.*|^2.*'
+            php-cs-fixer: '^3.4|^3.8'
           - laravel: 9.*
-            testbench: 7.*
+            testbench: '7.*'
             phpunit: '^9.5'
             larastan: '^2.*'
+            php-cs-fixer: '^3.8'
         exclude:
           - laravel: 9.*
             php: 7.3
