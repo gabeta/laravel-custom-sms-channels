@@ -18,13 +18,13 @@
         }
     ],
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^7.4|^8.0|^8.1",
         "guzzlehttp/guzzle": "^7.4",
         "illuminate/contracts": "^7.0|^8.0|^9.0",
-        "illuminate/notifications": "^7.0|^8.0|^9.0",
-        "spatie/laravel-package-tools": "^1.9.2"
+        "illuminate/notifications": "^7.0|^8.0|^9.0"
     },
     "require-dev": {
+        "cboden/ratchet": "^0.4.4",
         "friendsofphp/php-cs-fixer": "^3.4|^3.8",
         "infobip/infobip-api-php-client": "^3.2",
         "nunomaduro/collision": "^5.10.0|^6.0",
