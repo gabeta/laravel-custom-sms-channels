@@ -80,7 +80,7 @@ class LogClient
         return function ($matches) {
             $url = array_shift($matches);
 
-            return sprintf('<a target="_blank" rel="nofollow" href="%s">%s</a>', $url, $url);
+            return sprintf('<a target="_blank" style="color: cornflowerblue; text-decoration: underline;" rel="nofollow" href="%s">%s</a>', $url, $url);
         };
     }
 }
