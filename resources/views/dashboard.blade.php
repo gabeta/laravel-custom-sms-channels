@@ -41,18 +41,18 @@
                     <div class="flex flex-col divide-y divide-gray-600 overflow-y-auto h-5/6">
                         <template x-for="(message, index) in messages" :key="index">
                             <div @click="setCurrentMessage(message)" class="flex w-full p-4 space-x-4 cursor-pointer hover:opacity-80 transition"
-                                x-bind:class="currentMessage.number != message.number ? 'opacity-40' : ''">
+                                x-bind:class="currentMessage != null && currentMessage.number != message.number ? 'opacity-40' : ''">
                                 <div class="flex w-full space-x-2">
                                     <div class="flex space-x-2 items-center">
-                                        <!--div class="h-4 w-4 rounded-full bg-blue-600">
-                                        </div-->
+                                        <div x-show="messagesRead.filter(m => (m.number === message.number) && (m.lastMessageDate === message.lastMessageDate)).length === 0" class="h-4 w-4 rounded-full bg-blue-600">
+                                        </div>
                                         <div class="flex items-center justify-center h-12 w-12 rounded-full text-white font-bold bg-[#97989e]">
-                                            <span class="font-bold">B</span>
+                                            <span class="font-bold">{{ substr(config('app.name'), 0, 1) }}</span>
                                         </div>
                                     </div>
                                     <div class="flex flex-col space-y-1">
                                         <span class="text-lg font-bold text-white" x-text="message.number"></span>
-                                        <p class="truncate w-60 text-gray-400" x-html="message.lastMessage.message">
+                                        <p class="truncate w-60 text-gray-400 text-[0.90rem]" x-html="message.lastMessage.message.substring(0, 100) + ' ...'">
                                         </p>
                                     </div>
                                 </div>
@@ -92,7 +92,7 @@
 
                     <!-- BIG MOBILE -->
                     <div class="flex justify-center h-full">
-                        <div class="relative" v-show="currentMessage != null">
+                        <div class="relative">
                             <div class="absolute w-full h-full pt-10 pb-20 px-4">
                                 <!-- IPHONE MOBILE -->
                                     <div x-show="platform == 'ios'" class="flex flex-col h-full p-1">
@@ -102,7 +102,7 @@
                                             </svg>
                                             <div class="flex flex-col space-y-1 items-center">
                                                 <div class="flex items-center justify-center h-10 w-10 rounded-full text-white font-bold bg-[#97989e]">
-                                                    <span class="font-bold">B</span>
+                                                    <span class="font-bold">{{ substr(config('app.name'), 0, 1) }}</span>
                                                 </div>
                                                 <span class="font-bold text-gray-900 text-xs">{{ config('app.name') }}</span>
                                             </div>
@@ -111,12 +111,12 @@
                                             </svg>
                                         </div>
                                         <div class="bg-white h-5/6 overflow-y-auto">
-                                            <template x-for="(m, index) in currentMessage.messages" :key="index">
+                                            <template x-for="(m, index) in currentMessage?.messages" :key="index">
                                                 <div class="flex flex-col space-y-2 p-2">
                                                     <div class="flex justify-center">
-                                                        <span class="text-[0.60rem] text-gray-800">mer, 8 juin à 14:32</span>
+                                                        <span class="text-[0.60rem] text-gray-800" x-text="m.formattedDate"></span>
                                                     </div>
-                                                    <div class="w-5/6 p-4 rounded-lg text-gray-900 bg-[#f3f3f3]" x-html="m.message">
+                                                    <div class="w-5/6 p-4 text-[0.90rem] rounded-lg text-gray-900 bg-[#f3f3f3]" x-html="m.message">
                                                     </div>
                                                 </div>
                                             </template>
@@ -167,16 +167,16 @@
                                            </div>
                                         </div>
                                         <div class="flex flex-col space-y-4 h-5/6 p-2 overflow-y-auto">
-                                            <template  x-for="(m, index) in currentMessage.messages" >
+                                            <template  x-for="(m, index) in currentMessage?.messages" >
                                                 <div :key="index" class="flex flex-col space-y-2">
                                                     <div class="flex justify-center">
-                                                        <span class="text-[0.60rem] text-gray-800">mer, 8 juin à 14:32</span>
+                                                        <span class="text-[0.60rem] text-gray-800" x-text="m.formattedDate"></span>
                                                     </div>
                                                     <div class="flex space-x-4 text-white">
                                                         <div class="flex items-center justify-center h-10 w-10 rounded-full  font-bold bg-[#97989e]">
                                                             <span class="font-bold">B</span>
                                                         </div>
-                                                        <div class="w-5/6 bg-[#3d80db] rounded-tl-lg rounded-tr-lg rounded-br-lg p-2" x-html="m.message"></div>
+                                                        <div class="w-5/6 text-gray-900 bg-[#f3f3f3] text-[0.90rem] rounded-tl-lg rounded-tr-lg rounded-br-lg p-2" x-html="m.message"></div>
                                                     </div>
                                                 </div>
                                             </template>
@@ -220,13 +220,17 @@
                 platform: 'ios',
                 messages: @json($messages),
                 currentMessage: null,
+                messagesRead: JSON.parse(localStorage.getItem('customsms_messagesRead') || '[]'),
 
                 init() {
-                    this.currentMessage = this.messages[0]
+                    var conn = new WebSocket('ws://0.0.0.0:6001/echo-custom-sms-channel');
+                    conn.onopen = function(e) { console.log('Hello Me!'); };
                 },
 
                 setCurrentMessage(message) {
                     this.currentMessage = message
+                    this.messagesRead.push(message)
+                    localStorage.setItem('customsms_messagesRead', JSON.stringify(this.messagesRead))
                 },
 
                 fetchMessages() {

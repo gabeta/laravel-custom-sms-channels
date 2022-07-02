@@ -2,6 +2,7 @@
 
 namespace Gabeta\CustomSmsChannels\Clients;
 
+use Carbon\Carbon;
 use Illuminate\Log\LogManager;
 
 class LogClient
@@ -51,6 +52,7 @@ class LogClient
                 return [
                     'message' => $this->autoLinkText(trim($message['message'])),
                     'date' => $message['date'],
+                    'formattedDate' => Carbon::parse($message['date'])->format('D, d M à h:i')
                 ];
             });
 

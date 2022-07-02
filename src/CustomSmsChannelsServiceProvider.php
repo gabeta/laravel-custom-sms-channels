@@ -2,6 +2,7 @@
 
 namespace Gabeta\CustomSmsChannels;
 
+use Gabeta\CustomSmsChannels\Console\Commands\StartServer;
 use Gabeta\CustomSmsChannels\Http\Controllers\PreviewDashboardController;
 use GuzzleHttp\Client;
 use Illuminate\Notifications\ChannelManager;
@@ -84,6 +85,12 @@ class CustomSmsChannelsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                StartServer::class 
+            ]);
+        }
+
         $this->loadViewsFrom(__DIR__.'/../resources/views/', 'customsms');
 
         if ($this->app->runningInConsole()) {
