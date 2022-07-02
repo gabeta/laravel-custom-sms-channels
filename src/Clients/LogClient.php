@@ -23,6 +23,10 @@ class LogClient
 
     public function read()
     {
+        if (! file_exists($this->config['path'])) {
+            return [];
+        }
+        
         $content = file_get_contents($this->config['path']);
         $content = (explode('@', preg_replace('#[\r\n]#', '@', $content)));
 

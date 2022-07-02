@@ -12,6 +12,8 @@ without adding additional code. Have you always wanted to receive your SMS local
 preview them make consequent adjustments?
 We also offer you this functionality.
 
+![Preview Dashbaord](/art/bg-ios.png "Laravel custom sms channel preview dashboard")
+
 ## Installation
 
 You can install the package via composer:

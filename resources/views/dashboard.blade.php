@@ -157,7 +157,7 @@
                                         <div class="flex justify-between w-full px-4 py-2">
                                            <div class="flex space-x-4 items-center">
                                                 <svg class="w-5 h-5" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><rect x="155.14" y="-28.39" width="33.43" height="336.97" transform="translate(140.68 -79.42) rotate(42.73)" fill="#222"/><rect x="173.81" y="183.62" width="33.43" height="370.33" transform="translate(590.69 479.06) rotate(132.73)" fill="#222"/></svg>
-                                                <span>Boty</span>
+                                                <span>{{ config('app.name')}}</span>
                                            </div>
                                            <div class="flex space-x-4 items-center">
                                                 <svg class="w-5 h-5" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M421.76,45.92c-38.82-32-158.09,6-212.27,8C92.19,58.34.65,157.06,5.07,274.35S108.2,483,225.49,478.62c117.14-4.42,208.69-103,204.27-220.27C427.39,195.39,466.79,83.23,421.76,45.92ZM406.49,258.3c3.91,103.9-77.12,191.28-180.87,195.19a188.22,188.22,0,0,1-195.19-181c-3.91-103.9,77.12-191.12,181-195,48-1.81,153.58-35.53,188-7.08C439.33,103.22,404.39,202.58,406.49,258.3Z" fill="#222"/><rect x="113.29" y="196.35" width="178.65" height="144.34" rx="1.39" transform="translate(-9.97 7.82) rotate(-2.16)" fill="#222"/><rect x="330.92" y="202.31" width="22.33" height="121.89" transform="translate(-9.67 13.07) rotate(-2.16)" fill="#222"/><rect x="283.95" y="218.87" width="58.15" height="90.97" transform="translate(-9.73 11.98) rotate(-2.16)" fill="#222"/></svg>
@@ -174,7 +174,7 @@
                                                     </div>
                                                     <div class="flex space-x-4 text-white">
                                                         <div class="flex items-center justify-center h-10 w-10 rounded-full  font-bold bg-[#97989e]">
-                                                            <span class="font-bold">B</span>
+                                                            <span class="font-bold">{{ substr(config('app.name'), 0, 1) }}</span>
                                                         </div>
                                                         <div class="w-5/6 text-gray-900 bg-[#f3f3f3] text-[0.90rem] rounded-tl-lg rounded-tr-lg rounded-br-lg p-2" x-html="m.message"></div>
                                                     </div>
