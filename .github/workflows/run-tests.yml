@@ -33,7 +33,11 @@ jobs:
             php-cs-fixer: '^3.8'
         exclude:
           - laravel: 9.*
-            php: 7.4
+            php: 7.4 
+          - laravel: 8.*
+            php: 8.1        
+          - laravel: 7.*
+            php: 8.1
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
