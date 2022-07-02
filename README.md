@@ -8,7 +8,9 @@
 Laravel notification channels package for a few SMS providers.
 The specificity of this package is that you can combine several 
 SMS sending services (supported by the package) in the same project 
-without adding additional code.
+without adding additional code. Have you always wanted to receive your SMS locally? 
+preview them make consequent adjustments?
+We also offer you this functionality.
 
 ## Installation
 
@@ -27,19 +29,45 @@ php artisan vendor:publish --provider="Gabeta\CustomSmsChannels\CustomSmsChannel
 ### Setting up your SMS provider
 
 ```php
-    'default' => 'infobip',
+'default' => env('CUSTOM_SMS_CHANNEL', 'sms_log'),
 
-    'providers' => [
-        'infobip' => [
-            'send_from' => env('INFOBIP_SEND_FROM'),
-        
-            'api_host' => env('INFOBIP_API_HOST'),
-        
-            'api_key_prefix' => env('INFOBIP_API_KEY_PREFIX'),
-        
-            'api_key' => env('INFOBIP_API_KEY'),
-        ]
+'preview' => [
+    'enable' => true,
+
+    'domain' => null,
+
+    'path' => '/customs-sms-dashboard',
+
+    'broadcasting' => [
+        'host' => '0.0.0.0',
+
+        'port' => '6001'
     ]
+],
+
+'providers' => [
+
+    'sms_log' => [
+        'config' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/custom-sms.log'),
+            'level' => 'info',
+        ],
+    ],
+
+    'infobip' => [
+        'send_from' => env('INFOBIP_SEND_FROM'),
+
+        'api_host' => env('INFOBIP_API_HOST'),
+
+        'api_key_prefix' => env('INFOBIP_API_KEY_PREFIX'),
+
+        'api_key' => env('INFOBIP_API_KEY'),
+    ]
+
+    ....
+]
+
 ```
 
 ## Usage
@@ -103,13 +131,25 @@ public function routeNotificationForCustomSms()
 We advise you to provide the telephone number without the prefix. As mentioned above
 top the system will take care of the prefixing according to the provider.
 
+### Preview SMS Localy
+
+To preview your SMS locally use the `sms_log` driver activate the preview
+in your config file.
+
+Publish dashboard assets:
+```bash
+php artisan vendor:publish --provider="Gabeta\CustomSmsChannels\CustomSmsChannelsServiceProvider" --tag="public"
+```
+Go to: http://YOUR_HOST/customs-sms-dashboard for preview your SMS.
+
 ### Provider supporter and those we intend to implement
 
-| Providers      | channel       | via method     | route notification method          |
-| -----------    | -----------   | --------       | --------                           |
+| Providers      | channel       | via method     | route notification method           |
+| -----------    | -----------   | --------       | --------                            |
 | log ✅          | log           | toSmsLog       | routeNotificationForSmsLog         |
 | infobip ✅      | infobip       | toInfobip      | routeNotificationForInfobip        | 
 | orange ❌       | orange        | toOrange       | routeNotificationForOrange         |
+| twillio ❌      | twillio       | toTwillio      | routeNotificationForTwillio        |
 
 You could use via or route notification method if you want behavior
 channel-specific. The package tries to find the via method and the route notification method
