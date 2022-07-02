@@ -140,7 +140,7 @@ Publish dashboard assets:
 ```bash
 php artisan vendor:publish --provider="Gabeta\CustomSmsChannels\CustomSmsChannelsServiceProvider" --tag="public"
 ```
-Go to: http://YOUR_HOST/customs-sms-dashboard for preview your SMS.
+Go to: **http://YOUR_HOST/customs-sms-dashboard** for preview your SMS.
 
 ### Provider supporter and those we intend to implement
 
