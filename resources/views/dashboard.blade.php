@@ -223,31 +223,33 @@
                 messagesRead: JSON.parse(localStorage.getItem('customsms_messagesRead') || '[]'),
 
                 init() {
-                    var conn = new WebSocket('ws://0.0.0.0:6001/echo-custom-sms-channel');
-                    conn.onopen = function(e) { console.log('Hello Me!'); };
+                    var conn = new WebSocket("ws://{{ $host }}:{{ $port }}/echo-custom-sms-channel");
+                    conn.onmessage = function(e) { 
+                        console.log(e.data);
+                    };
                 },
 
                 setCurrentMessage(message) {
-                    this.currentMessage = message
-                    this.messagesRead.push(message)
-                    localStorage.setItem('customsms_messagesRead', JSON.stringify(this.messagesRead))
+                    this.currentMessage = message;
+                    this.messagesRead.push(message);
+                    localStorage.setItem('customsms_messagesRead', JSON.stringify(this.messagesRead));
                 },
 
                 fetchMessages() {
-                    var that = this
+                    var that = this;
                     fetch('{{ route('customsms.sms-list') }}')
                         .then(response => response.json())
-                        .then(data => that.messages = data)
+                        .then(data => that.messages = data);
                 },
 
                 clearMessages() {
-                    var that = this
+                    var that = this;
                     fetch('{{ route('customsms.clear-sms') }}')
                         .then(response => response.json())
                         .then(function(data) {
                             that.messages = [];
                             that.currentMessage = null;
-                        })
+                        });
                 }
             }))
         })

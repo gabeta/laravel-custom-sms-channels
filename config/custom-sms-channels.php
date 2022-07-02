@@ -8,7 +8,13 @@ return [
 
         'domain' => null,
 
-        'path' => '/customs-sms-dashboard'
+        'path' => '/customs-sms-dashboard',
+
+        'broadcasting' => [
+            'host' => '0.0.0.0',
+
+            'port' => '6001'
+        ]
     ],
 
     'providers' => [

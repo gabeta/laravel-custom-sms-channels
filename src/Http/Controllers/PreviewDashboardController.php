@@ -10,7 +10,11 @@ class PreviewDashboardController extends Controller
     {
         $messages = app('providers.sms_log')->read();
 
-        return view('customsms::dashboard', compact('messages'));
+        $host = config('custom-sms-channels.preview.broadcasting.host');
+
+        $port = config('custom-sms-channels.preview.broadcasting.port');
+
+        return view('customsms::dashboard', compact('messages', 'host', 'port'));
     }
 
     public function smsList() 
