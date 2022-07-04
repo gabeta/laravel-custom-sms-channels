@@ -4,6 +4,7 @@ namespace Gabeta\CustomSmsChannels;
 
 use Gabeta\CustomSmsChannels\Channels\InfobipSmsChannel;
 use Gabeta\CustomSmsChannels\Channels\LogSmsChannel;
+use Gabeta\CustomSmsChannels\Channels\TwilioChannel;
 use Gabeta\CustomSmsChannels\Clients\LogClient;
 use GuzzleHttp\Client;
 use Illuminate\Contracts\Foundation\Application;
@@ -85,6 +86,24 @@ class CustomSmsManager
         return new LogSmsChannel(
             $this->app->make('providers.sms_log'),
             $this->app['config']['app']['name']
+        );
+    }
+
+    public function createProviderTwilio()
+    {
+        $config = $this->app['config']['custom-sms-channels']['providers']['twilio'];
+
+        return new \Twilio\Rest\Client(
+            $config['sid'],
+            $config['auth_token']
+        );
+    }
+
+    public function createChannelTwilio()
+    {
+        return new TwilioChannel(
+            $this->app->make('providers.twilio'),
+            $this->app['config']['custom-sms-channels.providers.twilio.number']
         );
     }
 }

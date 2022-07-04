@@ -146,12 +146,12 @@ Go to: **http://YOUR_HOST/customs-sms-dashboard** for preview your SMS.
 
 ### Provider supporter and those we intend to implement
 
-| Providers      | channel       | via method     | route notification method           |
-| -----------    | -----------   | --------       | --------                            |
-| log ✅          | log           | toSmsLog       | routeNotificationForSmsLog         |
-| infobip ✅      | infobip       | toInfobip      | routeNotificationForInfobip        | 
-| orange ❌       | orange        | toOrange       | routeNotificationForOrange         |
-| twillio ❌      | twillio       | toTwillio      | routeNotificationForTwillio        |
+| Providers       | channel       | via method     | route notification method           |
+| -----------     | -----------   | --------       | --------                            |
+| log ✅          | log           | toSmsLog       | routeNotificationForSmsLog          |
+| infobip ✅      | infobip       | toInfobip      | routeNotificationForInfobip         | 
+| twilio ✅       | twilio        | toTwilio       | routeNotificationForTwilio          |
+| orange ❌       | orange        | toOrange       | routeNotificationForOrange          |
 
 You could use via or route notification method if you want behavior
 channel-specific. The package tries to find the via method and the route notification method

@@ -7,20 +7,31 @@ use Illuminate\Notifications\Notification;
 use RuntimeException;
 use Throwable;
 
+/**
+ * Class ChannelAbstract
+ * @package Gabeta\CustomSmsChannels\Channels
+ */
 abstract class ChannelAbstract
 {
+    /**
+     * @param $notifiable
+     * @param Notification $notification
+     */
     public function send($notifiable, Notification $notification)
     {
         $phoneNumber = $this->getPhoneNumber($notifiable);
         $content = $this->getContent($notifiable, $notification);
 
         try {
-            $this->sendMessage($phoneNumber->getRouteNotification(), $content);
+            $this->sendMessage($phoneNumber, $content);
         } catch (Throwable $e) {
-            dd($e);
         }
     }
 
+    /**
+     * @param $notifiable
+     * @return mixed
+     */
     protected function getPhoneNumber($notifiable)
     {
         if (method_exists($notifiable, 'routeNotificationForInfobip')) {
@@ -42,6 +53,11 @@ abstract class ChannelAbstract
         return $phoneNumber;
     }
 
+    /**
+     * @param $notifiable
+     * @param Notification $notification
+     * @return mixed
+     */
     protected function getContent($notifiable, Notification $notification)
     {
         if (method_exists($notification, 'toInfobip')) {
@@ -57,5 +73,10 @@ abstract class ChannelAbstract
         return $content;
     }
 
-    abstract protected function sendMessage($phoneNumber, $content);
+    /**
+     * @param PhoneNumber $phoneNumber
+     * @param $content
+     * @return mixed
+     */
+    abstract protected function sendMessage(PhoneNumber $phoneNumber, $content);
 }

@@ -2,6 +2,7 @@
 
 namespace Gabeta\CustomSmsChannels\Channels;
 
+use Gabeta\CustomSmsChannels\PhoneNumber;
 use Infobip\Api\SendSmsApi;
 use Infobip\Model\SmsAdvancedTextualRequest;
 use Infobip\Model\SmsDestination;
@@ -19,9 +20,9 @@ class InfobipSmsChannel extends ChannelAbstract
         $this->client = $client;
     }
 
-    public function sendMessage($phoneNumber, $content)
+    public function sendMessage(PhoneNumber $phoneNumber, $content)
     {
-        $destination = (new SmsDestination())->setTo($phoneNumber);
+        $destination = (new SmsDestination())->setTo($phoneNumber->getRouteNotification());
 
         $message = (new SmsTextualMessage())
                     ->setFrom($this->from)

@@ -35,6 +35,14 @@ return [
             'api_key_prefix' => env('INFOBIP_API_KEY_PREFIX'),
 
             'api_key' => env('INFOBIP_API_KEY'),
+        ],
+
+        'twilio' => [
+            'sid' => env('TWILIO_SID'),
+
+            'auth_token' => env('TWILIO_AUTH_TOKEN'),
+
+            'number' => env('TWILIO_NUMBER'),
         ]
     ]
 ];
