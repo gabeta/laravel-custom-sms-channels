@@ -4,17 +4,11 @@ return [
     'default' => env('CUSTOM_SMS_CHANNEL', 'sms_log'),
 
     'preview' => [
-        'enable' => true,
+        'enable' => env('ENABLE_SMS_PREVIEW', true),
 
         'domain' => null,
 
         'path' => '/customs-sms-dashboard',
-
-        'broadcasting' => [
-            'host' => '0.0.0.0',
-
-            'port' => '6001'
-        ]
     ],
 
     'providers' => [

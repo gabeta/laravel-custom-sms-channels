@@ -34,7 +34,7 @@ php artisan vendor:publish --provider="Gabeta\CustomSmsChannels\CustomSmsChannel
 'default' => env('CUSTOM_SMS_CHANNEL', 'sms_log'),
 
 'preview' => [
-    'enable' => true,
+    'enable' => env('ENABLE_SMS_PREVIEW', true),
 
     'domain' => null,
 
