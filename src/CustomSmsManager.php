@@ -2,7 +2,7 @@
 
 namespace Gabeta\CustomSmsChannels;
 
-use Gabeta\CustomSmsChannels\Channels\InfobipSmsChannel;
+use Gabeta\CustomSmsChannels\Channels\InfobipChannel;
 use Gabeta\CustomSmsChannels\Channels\LogSmsChannel;
 use Gabeta\CustomSmsChannels\Channels\TwilioChannel;
 use Gabeta\CustomSmsChannels\Clients\LogClient;
@@ -67,7 +67,7 @@ class CustomSmsManager
 
     public function createChannelInfobip()
     {
-        return new InfobipSmsChannel(
+        return new InfobipChannel(
             $this->app->make('providers.infobip'),
             $this->app['config']['custom-sms-channels.providers.infobip.send_from']
         );

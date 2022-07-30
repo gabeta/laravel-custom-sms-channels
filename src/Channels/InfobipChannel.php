@@ -8,7 +8,7 @@ use Infobip\Model\SmsAdvancedTextualRequest;
 use Infobip\Model\SmsDestination;
 use Infobip\Model\SmsTextualMessage;
 
-class InfobipSmsChannel extends ChannelAbstract
+class InfobipChannel extends ChannelAbstract
 {
     protected $client;
 

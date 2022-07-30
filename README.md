@@ -39,12 +39,6 @@ php artisan vendor:publish --provider="Gabeta\CustomSmsChannels\CustomSmsChannel
     'domain' => null,
 
     'path' => '/customs-sms-dashboard',
-
-    'broadcasting' => [
-        'host' => '0.0.0.0',
-
-        'port' => '6001'
-    ]
 ],
 
 'providers' => [
@@ -144,19 +138,29 @@ php artisan vendor:publish --provider="Gabeta\CustomSmsChannels\CustomSmsChannel
 ```
 Go to: **http://YOUR_HOST/customs-sms-dashboard** for preview your SMS.
 
-### Provider supporter and those we intend to implement
+### Provider supporter
 
 | Providers       | channel       | via method     | route notification method           |
 | -----------     | -----------   | --------       | --------                            |
-| log ✅          | log           | toSmsLog       | routeNotificationForSmsLog          |
+| log ✅          | log           | toLogSms       | routeNotificationForLogSms          |
 | infobip ✅      | infobip       | toInfobip      | routeNotificationForInfobip         | 
 | twilio ✅       | twilio        | toTwilio       | routeNotificationForTwilio          |
-| orange ❌       | orange        | toOrange       | routeNotificationForOrange          |
 
 You could use via or route notification method if you want behavior
 channel-specific. The package tries to find the via method and the route notification method
 specific to its provider if it does not find it it will call the `routeNotificationForCustomSms` functions
 and `toCustomSms`.
+
+Would you like to combine a notification channel package such as [Laravel vonage](https://github.com/laravel/vonage-notification-channel) package with our package ? Yes it is possible.
+you must first install their package then add their channel with null value in the supported provider in the config file.
+
+Example:
+
+```php
+'providers' => [
+    'vonage' => null
+]
+```
 
 ## Testing
 

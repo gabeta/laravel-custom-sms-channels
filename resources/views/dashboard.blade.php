@@ -56,9 +56,6 @@
                                         </p>
                                     </div>
                                 </div>
-                                <i class="text-sm text-gray-500">
-                                    hier
-                                </i>
                             </div>
                         </template>
                     </div>
@@ -221,13 +218,6 @@
                 messages: @json($messages),
                 currentMessage: null,
                 messagesRead: JSON.parse(localStorage.getItem('customsms_messagesRead') || '[]'),
-
-                init() {
-                    var conn = new WebSocket("ws://{{ $host }}:{{ $port }}/echo-custom-sms-channel");
-                    conn.onmessage = function(e) { 
-                        console.log(e.data);
-                    };
-                },
 
                 setCurrentMessage(message) {
                     this.currentMessage = message;

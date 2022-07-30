@@ -22,10 +22,7 @@ abstract class ChannelAbstract
         $phoneNumber = $this->getPhoneNumber($notifiable);
         $content = $this->getContent($notifiable, $notification);
 
-        try {
-            $this->sendMessage($phoneNumber, $content);
-        } catch (Throwable $e) {
-        }
+        $this->sendMessage($phoneNumber, $content);
     }
 
     /**
@@ -34,23 +31,30 @@ abstract class ChannelAbstract
      */
     protected function getPhoneNumber($notifiable)
     {
-        if (method_exists($notifiable, 'routeNotificationForInfobip')) {
-            $phoneNumber = $notifiable->routeNotificationForInfobip();
+        $methodName = "routeNotificationFor{$this->getMethodName()}";
+
+        if (method_exists($notifiable, $methodName)) {
+            $phoneNumber = $notifiable->{$methodName}();
         } elseif (method_exists($notifiable, 'routeNotificationForCustomSms')) {
             $phoneNumber = $notifiable->routeNotificationForCustomSms();
         } else {
             throw new RuntimeException(
-                'enable to access to method "routeNotificationForInfobip" or "routeNotificationForCustomSms" on '.get_class($notifiable)
+                'enable to access to method "'.$methodName.'" or "routeNotificationForCustomSms" on '.get_class($notifiable)
             );
         }
 
         if (! ($phoneNumber instanceof PhoneNumber)) {
             throw new RuntimeException(
-                '"routeNotificationForInfobip" or "routeNotificationForCustomSms" must return PhoneNumber instance'
+                '"'.$methodName.'" or "routeNotificationForCustomSms" must return PhoneNumber instance'
             );
         }
 
         return $phoneNumber;
+    }
+
+    protected function getMethodName(): string
+    {
+        return str_replace('Channel', '', class_basename($this));
     }
 
     /**
@@ -60,13 +64,15 @@ abstract class ChannelAbstract
      */
     protected function getContent($notifiable, Notification $notification)
     {
-        if (method_exists($notification, 'toInfobip')) {
-            $content = $notification->toInfobip($notifiable);
+        $methodName = "to{$this->getMethodName()}";
+
+        if (method_exists($notification, $methodName)) {
+            $content = $notification->{$methodName}($notifiable);
         } elseif (method_exists($notification, 'toCustomSms')) {
             $content = $notification->toCustomSms($notifiable);
         } else {
             throw new RuntimeException(
-                'enable to access to method "toInfobip" or "toCustomSms" on '.get_class($notifiable)
+                'enable to access to method "'.$methodName.'" or "toCustomSms" on '.get_class($notifiable)
             );
         }
 

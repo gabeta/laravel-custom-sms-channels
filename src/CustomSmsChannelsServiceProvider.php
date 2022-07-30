@@ -2,7 +2,6 @@
 
 namespace Gabeta\CustomSmsChannels;
 
-use Gabeta\CustomSmsChannels\Console\Commands\StartServer;
 use Gabeta\CustomSmsChannels\Http\Controllers\PreviewDashboardController;
 use GuzzleHttp\Client;
 use Illuminate\Notifications\ChannelManager;
@@ -43,7 +42,11 @@ class CustomSmsChannelsServiceProvider extends ServiceProvider
 
     protected function configureChannels()
     {
-        $providers = array_keys($this->app['config']['custom-sms-channels']['providers']);
+        $providers = array_filter($this->app['config']['custom-sms-channels']['providers'], function ($provider) {
+            return ! is_null($provider);
+        });
+
+        $providers = array_keys($providers);
 
         foreach ($providers as $provider) {
             $this->app->singleton('providers.'.$provider, function ($app) use ($provider) {
@@ -85,12 +88,6 @@ class CustomSmsChannelsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                StartServer::class 
-            ]);
-        }
-
         $this->loadViewsFrom(__DIR__.'/../resources/views/', 'customsms');
 
         if ($this->app->runningInConsole()) {
