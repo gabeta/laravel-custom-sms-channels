@@ -24,9 +24,15 @@ class TwilioChannel extends ChannelAbstract
      */
     protected function sendMessage(PhoneNumber $phoneNumber, $content)
     {
-        $this->client->messages->create($phoneNumber->getRouteNotification('+'), [
+        $options = [
             'from' => $this->from,
             'body' => $content
-        ]);
+        ];
+
+        if (config('custom-sms-channels.providers.twilio.status_callback')) {
+            $options['statusCallback'] = config('custom-sms-channels.providers.twilio.status_callback');
+        }
+
+        $this->client->messages->create($phoneNumber->getRouteNotification('+'), $options);
     }
 }

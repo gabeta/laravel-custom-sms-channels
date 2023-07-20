@@ -37,6 +37,8 @@ return [
             'auth_token' => env('TWILIO_AUTH_TOKEN'),
 
             'number' => env('TWILIO_NUMBER'),
+
+            'status_callback' => env('TWILIO_STATUS_CALLBACK', null),
         ]
     ]
 ];
